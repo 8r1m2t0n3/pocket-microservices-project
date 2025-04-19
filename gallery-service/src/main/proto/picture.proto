@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option java_package = "com.brimstone.picture_grpc_server.proto";
+option java_multiple_files = true;
+
+package com.brimstone.picture;
+
+message PictureCreationRequest {
+    bytes image = 1;
+    string title = 2;
+    string author = 3;
+    int32 creationYear = 4;
+}
+
+message PictureCreationResponse {
+    string id = 1;
+    string message = 2;
+}
+
+message PictureRequest {
+    string id = 1;
+}
+
+message PictureResponse {
+    string id = 1;
+    bytes image = 2;
+    string title = 3;
+    string author = 4;
+    int32 creationYear = 5;
+}
+
+service PictureService {
+    rpc save(PictureCreationRequest) returns (PictureCreationResponse);
+    rpc getById(PictureRequest) returns (PictureResponse);
+}
